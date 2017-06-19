@@ -23,7 +23,10 @@ func fibHandler(w http.ResponseWriter, r *http.Request) {
 	//---------------------------------------------------------------------	
 	if (err != nil) {
 		w.WriteHeader(400)			
-		_,_ = w.Write([]byte("Invalid Input")) 	// int,error			 
+		_,err = w.Write([]byte("Invalid Input")) 	 
+		if(err != nil){	
+	     	fmt.Printf("Error writing - %v",err)      	
+	    }	 				 
 	    return
 	}
 	//---------------------------------------------------------------------
@@ -32,9 +35,14 @@ func fibHandler(w http.ResponseWriter, r *http.Request) {
 	fibRet,err := buildFib(fibNum)
 	 
     if (err == nil){	   		 
-	     _,_ = w.Write(fibRet)                  // int,error		
-	     w.WriteHeader(200)	     
+	     _,err = w.Write(fibRet)                  
+	     if(err == nil){	
+	        w.WriteHeader(200)
+	     }else{
+	     	fmt.Printf("Error writing - %v",err)      	
+	     }	     
     }else{
     	 w.WriteHeader(400)	      	
     }
+    return
 }

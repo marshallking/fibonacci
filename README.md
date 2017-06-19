@@ -44,7 +44,7 @@ TO DEPLOY/RUN:
 
 API:
 
-    /fibnoacci
+    /fibonacci
 
 PARAMS:
 

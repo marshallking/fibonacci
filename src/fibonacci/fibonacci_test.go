@@ -14,10 +14,14 @@ var req *http.Request
 var err error
 var respRec *httptest.ResponseRecorder 
 
+func init() {
+     /* load test data */
+    setupFibNumbers()
+	setupFibMap() 
+	setup()	        
+}
  
 func TestFibArrayBuild(t *testing.T) {
-
-	setupFibNumbers()
 	 
     if(gFibNumbers[0] != 0){
       fmt.Printf("fibonacci number at spot 4 is %d  and should be 2. \n", gFibNumbers[3])	
@@ -30,7 +34,7 @@ func TestFibArrayBuild(t *testing.T) {
 
 func TestBuildFib(t *testing.T) {
 	
-	bfibResult,err := buildFib(5)
+	bfibResult,err := getFib(5)
 	fibResult := string(bfibResult[:])
 	
 	if(fibResult != "[0,1,1,2,3]" || err != nil){
@@ -72,7 +76,7 @@ func TestBuildFibMaxValue(t *testing.T) {
 	                 "1779979416004714189,2880067194370816120,4660046610375530309,7540113804746346429,"+
 	                 "12200160415121876738]" 
 	 	
-	bfibResult,err := buildFib(18446744073709551615)
+	bfibResult,err := getFib(18446744073709551615)
 	fibResult := string(bfibResult[:])
 	
 	if(fibResult != allFibNumbers || err != nil){
@@ -96,7 +100,7 @@ func TestBuildFibMaxValueMinusOne(t *testing.T) {
 	                 "1779979416004714189,2880067194370816120,4660046610375530309,7540113804746346429]"
 	                 
 	 	
-	bfibResult,err := buildFib(12200160415121876737)
+	bfibResult,err := getFib(12200160415121876737)
 	fibResult := string(bfibResult[:])
 	
 	if(fibResult != allFibNumbers || err != nil){
@@ -107,7 +111,7 @@ func TestBuildFibMaxValueMinusOne(t *testing.T) {
 
 func TestBuildFibZero(t *testing.T) {
 	
-	bfibResult,err := buildFib(0)
+	bfibResult,err := getFib(0)
 	fibResult := string(bfibResult[:])
 	
 	if(fibResult != "[]" || err != nil){
@@ -116,7 +120,7 @@ func TestBuildFibZero(t *testing.T) {
 }
 func TestBuildFibOne(t *testing.T) {
 	
-	bfibResult,err := buildFib(1)
+	bfibResult,err := getFib(1)
 	fibResult := string(bfibResult[:])
 	
 	if(fibResult != "[0]" || err != nil){
@@ -126,7 +130,7 @@ func TestBuildFibOne(t *testing.T) {
 
 func TestBuildFibBetween(t *testing.T) {
 	
-	bfibResult,err := buildFib(4)
+	bfibResult,err := getFib(4)
 	fibResult := string(bfibResult[:])
 	
 	if(fibResult != "[0,1,1,2,3]" || err != nil){
@@ -147,9 +151,9 @@ func setup() {
     respRec = httptest.NewRecorder()
 } 
 
-func TestGetReposHandler(t *testing.T) {	
+func TestFibonacciFunctionalHandler(t *testing.T) {	
 	 
-    setup()
+   
     
 	tests := []struct {
 		description        string

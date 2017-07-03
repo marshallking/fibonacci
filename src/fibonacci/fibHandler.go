@@ -32,7 +32,7 @@ func fibHandler(w http.ResponseWriter, r *http.Request) {
 	//---------------------------------------------------------------------
 	// lets build the return here
 	//---------------------------------------------------------------------	
-	fibRet,err := buildFib(fibNum)
+	fibRet,err := getFib(fibNum)
 	 
     if (err == nil){	   		 
 	     _,err = w.Write(fibRet)                  

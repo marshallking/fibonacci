@@ -27,7 +27,7 @@ const (
 	Equal   CompareResult = 0
 	Larger  CompareResult = 1
 )
-
+/* adding a main comment holder*/
 func main() {
 
 	r := mux.NewRouter()
